@@ -15,7 +15,23 @@
 
 - Podcasts: I like to keep myself up to date. Things are changing pretty fast. Here are some of my favourite ML podcasts I have listened to:-
  
-    *  (The Machine Learning Guide)[http://spotify.com/podcasts] by Tyler Renely (updating soon)
+    *  [The Machine Learning Guide](http://spotify.com/podcasts) by Tyler Renely (updating soon)
+
+    * Google Podcasts 
+
+- Telegram Channels:
+
+
+    * ...(updating soon)
+
+- Sites:
+
+    * ...(updating soon)
+
+- AI Road Maps:
+
+    * ...(updating soon)
+
 
 
 
