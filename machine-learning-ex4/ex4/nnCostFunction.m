@@ -61,38 +61,59 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+
 % Part 1
-a1 = [ones(m,1) X];
+x = [ones(m,1) X];
+
+a1 = x;
 
 z2 = a1 * Theta1';
 
-a2 = [ones(size(z2), 1) sigmoid(z2)];
+a2 = [ones(size(z2,1), 1) sigmoid(z2)];
 
 z3 =  a2 * Theta2';
 
 a3 = sigmoid(z3);
 
 h = a3;
-J = (-y' * log(h) - (1-y)' * log(1-h))/m;
 
+% One hot encode y into Y
+I = eye(num_labels);
+Y = zeros(m, num_labels);
+for i=1:m
+    Y(i,:) = I(y(i), :);
+end
 
+p = sum(sum(Theta1(:, 2:end) .^2, 2)) + sum(sum(Theta2(:,2:end) .^ 2, 2));
+J = sum(sum((-Y) .* log(h) - (1-Y) .* log(1-h), 2))/m + ((lambda * p)/(2*m));
 
+DELTA_1 = zeros(size(Theta1));
+DELTA_2 = zeros(size(Theta2));
 
+for t=1:m
 
+a1 = x(t, :);
 
+z2 = a1 * Theta1';
 
+a2 = [ones(size(z2,1), 1) sigmoid(z2)];
 
+z3 =  a2 * Theta2';
 
+a3 = sigmoid(z3);
 
+delta_3 = a3 - Y(t,:);
 
+temp = (Theta2'*delta_3');
+delta_2 = temp(2:end, :)'.*sigmoidGradient(z2);
 
+DELTA_1 = DELTA_1 + delta_2' * a1;
+DELTA_2 = DELTA_2 + delta_3' * a2;
 
+end
 
-
-
-
-
-
+Theta1_grad = (1/m) * DELTA_1;
+Theta2_grad = (1/m) * DELTA_2;
 
 % -------------------------------------------------------------
 
