@@ -27,11 +27,19 @@ centroids = zeros(K, n);
 %
 
 
-
-
-
-
-
+for k = 1:K
+    num = 0;
+    sum = zeros(n, 1);
+    % find all points for k
+    for i = 1:m
+        if(idx(i) == k )
+          sum = sum + X(i, :)';
+          num = num+1;
+        end
+    end
+    % mean of all points nearest k
+    centroids(k, :) = (sum/num)';
+end
 
 % =============================================================
 
